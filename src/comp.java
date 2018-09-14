@@ -7,14 +7,33 @@ public class comp {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-//		Scanner fileScan = new Scanner(System.in);
-//		System.out.println("type the full path to your text file, or the relative path");
-//		String fileStr = fileScan.nextLine();
-//		File file = new File(fileStr);
-		File file = new File("strings");
-//		../aobFind/src/
-//		fileScan.close();
+		File file = null;
+		String fileName = "";
+		if(args.length > 0) {
+//			Scanner fileScan = new Scanner(System.in);
+			file = new File(args[0]);
+			fileName = args[0];
+			
+		}else {
+			Scanner fileScan = new Scanner(System.in);
+			System.out.println("type the full, or relative path to your file. \nPressing enter will default to the strings file \nYou can also pass in an argument that is the file name");
+			String fileStr = fileScan.nextLine();
+			fileName = fileStr;
+			
+			if(fileStr.equals("")) {
+				file = new File("strings");								
+				fileName = "strings";
+			}else {
+				file = new File(fileStr);
+			}
+
+			fileScan.close();
+		}
+
 		Scanner scan = new Scanner(file);
+//		../aobFind/src/
+
+
 		
 		ArrayList<String> stringList = new ArrayList();
 		while(scan.hasNextLine()) {
@@ -28,7 +47,7 @@ public class comp {
 		scan.close();
 		String result = new String();
 		String resultWithSlashes = "\\x";
-		String mask = new String();
+		String mask = "";
 		char maskVal = 'x';
 		boolean writeMask = true;
 		
@@ -54,8 +73,17 @@ public class comp {
 				}
 			}
 		}
+		
+//		"const char * " + fileName + "Pattern = "
+
 		System.out.println(result);
 		System.out.println(resultWithSlashes);
 		System.out.println(mask);
+		System.out.println("\n\nto paste into your prog");
+		resultWithSlashes += "\"";
+		mask += "\"";
+		System.err.println("const char * " + fileName + "Pattern = \"" + resultWithSlashes + ";");
+		System.err.println("const char * " + fileName + "Mask = \"" + mask + ";");
+		
 	}
 }
