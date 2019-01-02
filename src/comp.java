@@ -77,9 +77,15 @@ public class comp {
 //		"const char * " + fileName + "Pattern = "
 
 		System.out.println(result);
-		System.out.println(resultWithSlashes);
-		System.out.println(mask);
+		// System.out.println(resultWithSlashes);
+		// System.out.println(mask);
 		System.out.println("\n\nto paste into your prog");
+		if(resultWithSlashes.charAt(resultWithSlashes.length() - 1) == 'x'){
+			System.out.println("the x shouldn't be here");
+			resultWithSlashes = resultWithSlashes.substring(0, resultWithSlashes.length() - 2);
+		}else{
+			mask += "x";
+		}
 		resultWithSlashes += "\"";
 		mask += "\"";
 		System.err.println("const char * " + fileName + "Pattern = \"" + resultWithSlashes + ";");
